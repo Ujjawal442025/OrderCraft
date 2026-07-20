@@ -1,0 +1,368 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #050505;
+  --surface: #0d0d0d;
+  --purple-deep: #7c3aed;
+  --purple-core: #8b5cf6;
+  --purple-light: #a855f7;
+  --glow: rgba(168, 85, 247, 0.4);
+  --text-primary: #ffffff;
+  --text-secondary: #bdbdbd;
+  --text-muted: #7a7a7a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+/* Volumetric Analog Film Noise Layer */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom radial gradient helper because Tailwind is desktop-first */
+.bg-radial-gradient {
+  background-image: radial-gradient(var(--tw-gradient-stops));
+}
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: "Inter", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ------------------------------------------------------------------ */
+/* Atmosphere layers: grid, noise, vignette                            */
+/* ------------------------------------------------------------------ */
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.03;
+  mask-image: radial-gradient(
+    ellipse 80% 60% at 60% 45%,
+    black 10%,
+    transparent 75%
+  );
+}
+
+.bg-noise {
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMiIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNuKSIvPjwvc3ZnPg==");
+  background-size: 200px 200px;
+}
+
+.bg-vignette {
+  background: radial-gradient(
+    120% 100% at 50% 40%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+}
+
+.bg-stars {
+  background-image:
+    radial-gradient(
+      1px 1px at 20% 30%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 75% 15%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 40% 70%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 85% 80%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 10% 85%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 60% 45%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 100%
+    );
+  background-repeat: no-repeat;
+}
+
+/* ------------------------------------------------------------------ */
+/* Navbar                                                               */
+/* ------------------------------------------------------------------ */
+
+.nav-glass {
+  background: rgba(5, 5, 5, 0.35);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  transition:
+    background 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.nav-glass.scrolled {
+  background: rgba(5, 5, 5, 0.72);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* ------------------------------------------------------------------ */
+/* Heading reveal masks                                                 */
+/* ------------------------------------------------------------------ */
+
+.line-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.line-inner {
+  display: block;
+  will-change: transform, opacity;
+}
+
+/* ------------------------------------------------------------------ */
+/* Buttons                                                              */
+/* ------------------------------------------------------------------ */
+
+.btn-primary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, var(--purple-deep), var(--purple-light));
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: -2;
+  background: radial-gradient(circle, var(--glow), transparent 65%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.btn-primary:hover::after {
+  opacity: 1;
+}
+
+.btn-secondary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-secondary span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-secondary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(101%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-secondary:hover::before {
+  transform: translateY(0%);
+}
+
+/* ------------------------------------------------------------------ */
+/* Hero artwork                                                        */
+/* ------------------------------------------------------------------ */
+
+.artwork-stage {
+  perspective: 1400px;
+}
+
+.artwork-tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.orbit-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 9999px;
+  border: 1px solid rgba(168, 85, 247, 0.16);
+  transform: translate(-50%, -50%);
+}
+
+.orbit-ring.r1 {
+  width: 62%;
+  height: 62%;
+  animation: spin 20s linear infinite;
+  border-color: rgba(168, 85, 247, 0.22);
+}
+
+.orbit-ring.r2 {
+  width: 82%;
+  height: 82%;
+  animation: spin-reverse 30s linear infinite;
+  border-color: rgba(139, 92, 246, 0.14);
+}
+
+.orbit-ring.r3 {
+  width: 104%;
+  height: 104%;
+  animation: spin 40s linear infinite;
+  border-color: rgba(124, 58, 237, 0.09);
+}
+
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(216, 180, 254, 0.7);
+  box-shadow: 0 0 6px rgba(168, 85, 247, 0.6);
+  animation: drift linear infinite;
+}
+
+/* Masked light sheen: a soft highlight clipped to the logo's own alpha
+   silhouette, so it looks like a specific facet is catching the light
+   rather than a highlight floating on top of a flat rectangle. */
+.glint-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(216, 180, 254, 0.55) 28%,
+    transparent 60%
+  );
+  background-repeat: no-repeat;
+  background-size: 70% 70%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  mix-blend-mode: screen;
+  transition: opacity 0.35s ease;
+}
+
+/* Individual vertex / facet-corner glints: brighten as the cursor nears
+   that specific point on the mark, so different sides of the logo light
+   up independently instead of the whole thing reacting as one flat block. */
+.points-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.point-glint {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border-radius: 9999px;
+  opacity: 0;
+  transform: scale(0.35);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(196, 158, 255, 0.75) 35%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  filter: blur(0.3px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll indicator                                                     */
+/* ------------------------------------------------------------------ */
+
+.scroll-wheel {
+  width: 3px;
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.7);
+  animation: wheel 2s ease-in-out infinite;
+}
+
+@keyframes wheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
