@@ -13,7 +13,7 @@ export const featuredProjects = [
     },
     glowColor: "rgba(124, 58, 237, 0.25)",
     gradient: "from-purple-900/20 via-transparent to-transparent",
-    imageSrc: "/assets/bagify.png",
+    imageSrc: `${import.meta.env.BASE_URL}assets/bagify.png`,
     projectUrl: "https://ujjawal442025.github.io/Bagify/",
   },
   {
@@ -30,7 +30,7 @@ export const featuredProjects = [
     },
     glowColor: "rgba(245, 158, 11, 0.22)",
     gradient: "from-amber-900/20 via-transparent to-transparent",
-    imageSrc: "/assets/lumiraz.png",
+    imageSrc: `${import.meta.env.BASE_URL}assets/lumiraz.png`,
     projectUrl: "#",
   },
   {
@@ -47,7 +47,7 @@ export const featuredProjects = [
     },
     glowColor: "rgba(16, 185, 129, 0.22)",
     gradient: "from-emerald-900/20 via-transparent to-transparent",
-    imageSrc: "/assets/astra.png",
+    imageSrc: `${import.meta.env.BASE_URL}assets/astra.png`,
     projectUrl: "#",
   },
 ];
