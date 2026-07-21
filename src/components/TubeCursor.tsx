@@ -69,10 +69,44 @@ export function TubesBackground({
 
         cleanup = () => {
           window.removeEventListener("resize", handleResize);
-          // If the library has a destroy method, call it
-          // app.destroy?.();
-          // Based on typical threejs-components, it might not have an explicit destroy exposed easily
-          // but we should at least nullify the ref
+
+          try {
+            // Stop any internal render/animation loop the lib exposes
+            app.stop?.();
+            app.pause?.();
+            app.destroy?.();
+            app.dispose?.();
+
+            // Dig into common three.js internals in case the lib doesn't
+            // expose a top-level destroy method
+            app.renderer?.setAnimationLoop?.(null);
+            app.renderer?.dispose?.();
+            app.scene?.traverse?.((obj: any) => {
+              obj.geometry?.dispose?.();
+              if (obj.material) {
+                const materials = Array.isArray(obj.material)
+                  ? obj.material
+                  : [obj.material];
+                materials.forEach((m: any) => m.dispose?.());
+              }
+            });
+          } catch (e) {
+            console.warn("TubesCursor cleanup failed:", e);
+          }
+
+          // Force-release the WebGL context so it doesn't count against the
+          // browser's context limit (prevents "blank canvas" after a few
+          // navigations)
+          try {
+            const canvas = canvasRef.current;
+            const gl =
+              canvas?.getContext("webgl2") || canvas?.getContext("webgl");
+            gl?.getExtension("WEBGL_lose_context")?.loseContext();
+          } catch (e) {
+            console.warn("Failed to release WebGL context:", e);
+          }
+
+          tubesRef.current = null;
         };
       } catch (error) {
         console.error("Failed to load TubesCursor:", error);

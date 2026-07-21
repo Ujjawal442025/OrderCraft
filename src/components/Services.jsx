@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { servicesData } from "./servicesData";
-import { ServiceCard } from "./ServiceCard";
-import { StickyImage } from "./StickyImage";
-import { initServicesAnimation } from "../../animations/servicesAnimation";
+import { servicesData } from "./services/servicesData";
+import { ServiceCard } from "./services/ServiceCard";
+import { StickyImage } from "./services/StickyImage";
+import { initServicesAnimation } from "../animations/servicesAnimation";
 import gsap from "gsap";
 export const Services = () => {
   const containerRef = useRef(null);

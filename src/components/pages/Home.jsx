@@ -1,5 +1,5 @@
 import Hero from "../Hero.jsx";
-import { Services } from "../services/Services.jsx";
+import { Services } from "../Services.jsx";
 import { FeaturedWork } from "../featured-work/FeaturedWork.jsx";
 import Testimonials from "../testimonials/Testimonials.jsx";
 import { FinalCTA } from "../FinalCTA.jsx";

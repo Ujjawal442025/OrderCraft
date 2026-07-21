@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "./components/Navbar.jsx";
 import PageTransitionOverlay from "./animations/PageTransitionOverlay.jsx";
 import Home from "./components/pages/Home.jsx";
@@ -9,6 +11,8 @@ import About from "./components/pages/About.jsx";
 import Contact from "./components/pages/Contact.jsx";
 import "./styles/hero.css";
 import Pricing from "./components/pages/Pricing.jsx";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const location = useLocation();
@@ -25,6 +29,18 @@ export default function App() {
     if (location.pathname === displayedLocation.pathname) return;
 
     overlayRef.current?.play(() => {
+      console.log("✅ onCovered callback");
+      console.log("Old:", displayedLocation.pathname);
+      console.log("New:", location.pathname);
+
+      // IMPORTANT: kill every active ScrollTrigger (this synchronously
+      // reverts any pin-spacer wrappers it inserted into the DOM) BEFORE
+      // React unmounts the outgoing page. If we let each component's own
+      // useEffect cleanup handle this instead, it races with React's own
+      // unmount/removeChild pass and throws
+      // "NotFoundError: Failed to execute 'removeChild' on 'Node'".
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+
       setDisplayedLocation(location);
       window.scrollTo(0, 0);
     });
