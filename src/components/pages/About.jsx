@@ -43,7 +43,7 @@ export default function About() {
       role: "Founder",
       name: "Piyush Joshi",
       bio: "Leading the studio's creative vision, client strategy, and product direction while ensuring every project reflects premium craftsmanship.",
-      img: `${import.meta.env.BASE_URL}assets/piyush.jpeg`,
+      img: `${import.meta.env.BASE_URL}assets/Piyush.jpeg`,
     },
     {
       role: "AI Web Developer",
