@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom"; // Added for tracking query parameters
 import { initContactAnimations } from "./contactAnimation";
+import SEO from "../SEO.jsx";
 
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzoSpM2EWnJteQPG3YvvU86HSJeIhIttuPWo43M7ZL9cBprnVen23_bHVq70A1Da4HE-w/exec";
@@ -181,6 +182,11 @@ export default function Contact() {
         "--global-my": `${mousePos.y}px`,
       }}
     >
+      <SEO
+        title="Contact Us"
+        description="Get in touch with OrderCraft to start your next web development, UI/UX design, or AI automation project. Response within 24 hours."
+        path="/contact"
+      />
       {/* BACKGROUND GRAPHIC ORNAMENTS */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--global-mx)_var(--global-my),rgba(147,51,234,0.06)_0%,transparent_50%)] pointer-events-none z-10" />
       <div className="absolute top-[-5%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-purple-900/10 blur-[130px] mix-blend-screen pointer-events-none" />

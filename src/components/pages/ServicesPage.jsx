@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { initServiceAnimations } from "./serviceAnimationPage";
-
+import SEO from "../Seo.jsx";
 export default function ServicesPage() {
   const containerRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -140,6 +140,11 @@ export default function ServicesPage() {
         "--global-my": `${mousePos.y}px`,
       }}
     >
+      <SEO
+        title="Services"
+        description="Get in touch with OrderCraft to start your next web development, UI/UX design, or AI automation project. Response within 24 hours."
+        path="/services"
+      />
       {/* GLOBAL GLOW EFFECTS */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--global-mx)_var(--global-my),rgba(147,51,234,0.06)_0%,transparent_50%)] pointer-events-none z-10" />
       <div className="absolute top-[-10%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-purple-900/10 blur-[130px] mix-blend-screen pointer-events-none" />

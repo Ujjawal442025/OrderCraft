@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ujjawal442025.github.io/OrderCraft/sitemap.xml

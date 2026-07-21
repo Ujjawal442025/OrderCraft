@@ -5,7 +5,7 @@ import {
   featuredProjects,
   processSteps,
 } from "../featured-work/featuredProjects";
-
+import SEO from "../Seo.jsx";
 // Register GreenSock Plugins
 gsap.registerPlugin(ScrollTrigger);
 
@@ -212,6 +212,11 @@ export default function Work() {
       ref={containerRef}
       className="relative w-full bg-[#050505] overflow-hidden text-white selection:bg-purple-600/30 font-sans"
     >
+      <SEO
+        title="Work"
+        description="Get in touch with OrderCraft to start your next web development, UI/UX design, or AI automation project. Response within 24 hours."
+        path="/work"
+      />
       {/* GLOBAL HIGH-FIDELITY ATMOSPHERES */}
       {/* 1. Global Subtle Mouse Spotlight */}
       <div

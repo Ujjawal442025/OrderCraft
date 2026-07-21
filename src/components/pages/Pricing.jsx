@@ -6,7 +6,7 @@ import {
   resetTiltEffect,
 } from "./pricingAnimation";
 import { gsap } from "gsap";
-
+import SEO from "../Seo.jsx";
 const Footer = () => (
   <div className="w-full py-10 bg-neutral-950 border-t border-white/5 flex flex-col items-center justify-center text-sm text-neutral-500">
     © 2026 OrderCraft. All rights reserved.
@@ -299,6 +299,11 @@ export default function Pricing() {
       ref={mainContainerRef}
       className="relative w-full overflow-x-hidden min-h-screen bg-[#07050a] text-white selection:bg-purple-500/30 font-sans"
     >
+      <SEO
+        title="Pricing"
+        description="Get in touch with OrderCraft to start your next web development, UI/UX design, or AI automation project. Response within 24 hours."
+        path="/pricing"
+      />
       {/* --- MASTER BACKGROUND LAYER SUITE --- */}
       <div className="mouse-spotlight pointer-events-none fixed w-[300px] h-[300px] bg-purple-600/10 rounded-full blur-[120px] transition-opacity duration-500 z-10" />
       <div className="blueprint-bg pointer-events-none fixed inset-0 bg-[linear-gradient(to_right,#1f1a2e_1px,transparent_1px),linear-gradient(to_bottom,#1f1a2e_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20 z-0" />
