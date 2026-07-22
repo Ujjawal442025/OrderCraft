@@ -131,7 +131,7 @@ export default function Hero() {
               <div className="mt-8 flex flex-row items-center justify-center gap-4 lg:justify-start">
                 <span ref={primaryBtnRef} className="flex-1 sm:flex-none">
                   <a
-                    href="/contact"
+                    href="/OrderCraft/contact"
                     variant="primary"
                     className="w-full bg-purple-600 px-4 py-3 rounded-3xl flex gap-4 sm:w-auto"
                   >
@@ -140,7 +140,7 @@ export default function Hero() {
                 </span>
                 <span ref={secondaryBtnRef} className="flex-1 sm:flex-none">
                   <a
-                    href="/work"
+                    href="/OrderCraft/work"
                     variant="secondary"
                     className="w-full bg-purple-600 px-4
                      py-3 rounded-3xl sm:w-auto"

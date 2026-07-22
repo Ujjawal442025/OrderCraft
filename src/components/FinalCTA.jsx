@@ -319,7 +319,7 @@ export const FinalCTA = () => {
           className="mt-12 flex flex-col sm:flex-row items-center gap-6 opacity-0 transform-gpu z-40"
         >
           <a
-            href="/contact"
+            href="/OrderCraft/contact"
             ref={primaryBtnRef}
             onMouseEnter={handlePrimaryHoverInit}
             onMouseLeave={handlePrimaryHoverExit}

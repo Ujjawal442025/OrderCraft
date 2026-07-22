@@ -520,7 +520,7 @@ export default function About() {
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
               <span className="group-hover:text-white transition-colors duration-300">
                 <a
-                  href="/contact
+                  href="/OrderCraft/contact
                 "
                 >
                   Initiate Protocol

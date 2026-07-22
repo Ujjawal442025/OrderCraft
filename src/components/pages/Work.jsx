@@ -504,7 +504,7 @@ export default function Work() {
           <button className="group relative flex items-center justify-center px-10 py-5 rounded-full overflow-hidden bg-white text-black font-semibold tracking-widest text-xs uppercase shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:shadow-[0_0_35px_rgba(255,255,255,0.45)] hover:scale-105 active:scale-95 transition-all duration-500 transform-gpu">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <span className="relative z-10 flex items-center gap-2 mix-blend-difference text-white font-bold">
-              <a href="/contact">Initiate Project</a>
+              <a href="/OrderCraft/contact">Initiate Project</a>
               <svg
                 className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300"
                 fill="none"
