@@ -11,7 +11,12 @@ import {
 } from "../animations/heroAnimation.js";
 import { Link } from "react-router-dom";
 
-const AVATAR_COLORS = ["#8B5CF6", "#A855F7", "#7C3AED", "#C084FC"];
+const AVATAR_COLORS = [
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120&h=120",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100&h=100",
+  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100&h=100",
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100&h=100",
+];
 
 export default function Hero() {
   const badgeRef = useRef(null);
@@ -157,13 +162,11 @@ export default function Hero() {
                 className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start"
               >
                 <div className="flex -space-x-2.5">
-                  {AVATAR_COLORS.map((color, i) => (
-                    <span
+                  {AVATAR_COLORS.map((img, i) => (
+                    <img
+                      src={img}
                       key={i}
                       className="h-8 w-8 rounded-full border-2 border-bg"
-                      style={{
-                        background: `linear-gradient(135deg, ${color}, #050505)`,
-                      }}
                     />
                   ))}
                 </div>
