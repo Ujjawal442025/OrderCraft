@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import { Link } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 export const FinalCTA = () => {
@@ -318,8 +318,8 @@ export const FinalCTA = () => {
           ref={buttonGroupRef}
           className="mt-12 flex flex-col sm:flex-row items-center gap-6 opacity-0 transform-gpu z-40"
         >
-          <a
-            href="/OrderCraft/contact"
+          <Link
+            href="/contact"
             ref={primaryBtnRef}
             onMouseEnter={handlePrimaryHoverInit}
             onMouseLeave={handlePrimaryHoverExit}
@@ -335,7 +335,7 @@ export const FinalCTA = () => {
                 →
               </span>
             </span>
-          </a>
+          </Link>
 
           <button
             ref={secondaryBtnRef}

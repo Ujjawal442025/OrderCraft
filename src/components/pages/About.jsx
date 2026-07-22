@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { initAboutAnimations } from "./aboutAnimation.js";
 import SEO from "../Seo.jsx";
+import { Link } from "react-router-dom";
 export default function About() {
   const containerRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -519,12 +520,12 @@ export default function About() {
               {/* Internal Button Glow Sweep */}
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
               <span className="group-hover:text-white transition-colors duration-300">
-                <a
-                  href="/OrderCraft/contact
+                <Link
+                  to="/contact
                 "
                 >
                   Initiate Protocol
-                </a>
+                </Link>
               </span>
               <span className="ml-2 group-hover:text-white transition-transform duration-300 group-hover:translate-x-1 font-sans">
                 →

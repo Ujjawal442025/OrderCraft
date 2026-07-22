@@ -9,6 +9,7 @@ import {
   startFloating,
   startBreathingGlow,
 } from "../animations/heroAnimation.js";
+import { Link } from "react-router-dom";
 
 const AVATAR_COLORS = ["#8B5CF6", "#A855F7", "#7C3AED", "#C084FC"];
 
@@ -130,23 +131,23 @@ export default function Hero() {
               {/* Action Triggers */}
               <div className="mt-8 flex flex-row items-center justify-center gap-4 lg:justify-start">
                 <span ref={primaryBtnRef} className="flex-1 sm:flex-none">
-                  <a
-                    href="/OrderCraft/contact"
+                  <Link
+                    to="/contact"
                     variant="primary"
                     className="w-full bg-purple-600 px-4 py-3 rounded-3xl flex gap-4 sm:w-auto"
                   >
                     Start a Project
-                  </a>
+                  </Link>
                 </span>
                 <span ref={secondaryBtnRef} className="flex-1 sm:flex-none">
-                  <a
-                    href="/OrderCraft/work"
+                  <Link
+                    to="/work"
                     variant="secondary"
                     className="w-full bg-purple-600 px-4
                      py-3 rounded-3xl sm:w-auto"
                   >
                     View Our Work
-                  </a>
+                  </Link>
                 </span>
               </div>
 
