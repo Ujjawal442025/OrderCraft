@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom"; // Added for tracking query parameters
-import { Instagram, Facebook } from "lucide-react";
+import { Instagram, Facebook, Goal } from "lucide-react";
 import { initContactAnimations } from "./contactAnimation";
 import SEO from "../SEO.jsx";
 
-const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycby0WuDmq-3JFnVPRYHflio2BVAM3iqOOFHZLeY0EymQJnkqANrdg4b-1XtMHvS5NKM8/exec";
+const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
 
 export default function Contact() {
   // Simple inline icons for platforms not in lucide-react
