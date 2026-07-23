@@ -205,21 +205,19 @@ export const Footer = () => {
               02 // Navigation
             </span>
             <ul className="space-y-3 p-0 m-0 list-none">
-              {["Work", "Services", "About", "Contact", "Pricing"].map(
-                (item) => (
-                  <li key={item}>
-                    <Link
-                      to={`${item.toLowerCase()}`}
-                      className="group inline-flex items-center text-lg text-white/70 hover:text-white no-underline transition-colors duration-300"
-                    >
-                      <span className="relative">
-                        {item}
-                        <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-white transition-all duration-300 ease-out group-hover:w-full" />
-                      </span>
-                    </Link>
-                  </li>
-                ),
-              )}
+              {["Work", "Services", "About", "Pricing"].map((item) => (
+                <li key={item}>
+                  <Link
+                    to={`${item.toLowerCase()}`}
+                    className="group inline-flex items-center text-lg text-white/70 hover:text-white no-underline transition-colors duration-300"
+                  >
+                    <span className="relative">
+                      {item}
+                      <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-white transition-all duration-300 ease-out group-hover:w-full" />
+                    </span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
