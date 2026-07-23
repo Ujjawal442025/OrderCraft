@@ -205,7 +205,7 @@ export const Footer = () => {
               02 // Navigation
             </span>
             <ul className="space-y-3 p-0 m-0 list-none">
-              {["Home", "Projects", "Services", "About", "Contact"].map(
+              {["Work", "Services", "About", "Contact", "Pricing"].map(
                 (item) => (
                   <li key={item}>
                     <Link
