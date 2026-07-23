@@ -1,12 +1,38 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom"; // Added for tracking query parameters
+import { Instagram, Facebook } from "lucide-react";
 import { initContactAnimations } from "./contactAnimation";
 import SEO from "../SEO.jsx";
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzoSpM2EWnJteQPG3YvvU86HSJeIhIttuPWo43M7ZL9cBprnVen23_bHVq70A1Da4HE-w/exec";
+  "https://script.google.com/macros/s/AKfycby0WuDmq-3JFnVPRYHflio2BVAM3iqOOFHZLeY0EymQJnkqANrdg4b-1XtMHvS5NKM8/exec";
 
 export default function Contact() {
+  // Simple inline icons for platforms not in lucide-react
+  const WhatsAppIcon = (props) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 004.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.03c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.76-4.14-4.9-4.33-.14-.19-1.17-1.56-1.17-2.98 0-1.42.74-2.11 1-2.4.26-.29.58-.36.77-.36.19 0 .39 0 .55.01.18.01.42-.07.66.5.24.58.83 2 .9 2.15.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.31.38-.44.5-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12.99 2.06 1.3 2.36 1.44.29.15.46.13.63-.08.17-.2.72-.84.91-1.13.19-.29.38-.24.63-.14.26.1 1.65.78 1.94.92.29.14.48.21.55.33.07.12.07.68-.17 1.36z" />
+    </svg>
+  );
+  // Update these with your real profile URLs
+  const socialLinks = [
+    {
+      name: "Whatsapp",
+      url: "https://wa.me/918527283407",
+      Icon: WhatsAppIcon,
+    },
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/ordercraft21/",
+      Icon: Instagram,
+    },
+    {
+      name: "Facebook",
+      url: "https://www.facebook.com/share/19C7L1T2dH/",
+      Icon: Facebook,
+    },
+  ];
+
   const containerRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeFaq, setActiveFaq] = useState(null);
@@ -24,6 +50,9 @@ export default function Contact() {
       mobile: "",
       service: "",
       budget: "",
+      timeline: "",
+      source: "",
+      currentWebsite: "",
       message: "",
     };
 
@@ -69,6 +98,21 @@ export default function Contact() {
     "₹50K",
     "Above 50K",
     "Let's Discuss",
+  ];
+
+  const timelineList = [
+    "ASAP",
+    "Within 1 Month",
+    "1-3 Months",
+    "Just Exploring",
+  ];
+
+  const sourceList = [
+    "Google Search",
+    "Instagram",
+    "LinkedIn",
+    "Referral",
+    "Other",
   ];
 
   const faqData = [
@@ -151,18 +195,21 @@ export default function Contact() {
       form.append("mobile", formData.mobile);
       form.append("service", formData.service);
       form.append("budget", formData.budget);
+      form.append("timeline", formData.timeline);
+      form.append("source", formData.source);
+      form.append("currentWebsite", formData.currentWebsite);
       form.append("message", formData.message);
       form.append("selectedPlan", planQuery || "");
 
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         body: form,
-        redirect: "follow",
+        mode: "no-cors",
       });
 
-      const text = await response.text();
-      console.log("Apps Script Response:", text);
-
+      // Note: with mode "no-cors" the browser gives us an "opaque" response,
+      // so we can't read status/text back. If fetch didn't throw, we assume
+      // the request reached Google's servers successfully.
       setFormStatus("success");
       setFormData(getInitialFormState());
     } catch (error) {
@@ -338,6 +385,7 @@ export default function Contact() {
                       Service Required {planQuery && " (Auto-Configured)"}
                     </span>
                     <select
+                      required
                       value={formData.service}
                       onChange={(e) =>
                         setFormData({ ...formData, service: e.target.value })
@@ -359,6 +407,7 @@ export default function Contact() {
                       Estimated Budget {planQuery && " (Auto-Configured)"}
                     </span>
                     <select
+                      required
                       value={formData.budget}
                       onChange={(e) =>
                         setFormData({ ...formData, budget: e.target.value })
@@ -374,6 +423,71 @@ export default function Contact() {
                     </select>
                   </div>
                 </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Timeline Dropdown */}
+                  <div className="flex flex-col space-y-2">
+                    <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider">
+                      Project Timeline
+                    </span>
+                    <select
+                      value={formData.timeline}
+                      onChange={(e) =>
+                        setFormData({ ...formData, timeline: e.target.value })
+                      }
+                      className="w-full bg-[#0a0a12] border border-purple-900/40 rounded-lg px-4 py-3 text-sm text-slate-300 focus:outline-none focus:border-purple-400 appearance-none cursor-pointer focus:ring-1 focus:ring-purple-400"
+                    >
+                      <option value="">When do you want to start?</option>
+                      {timelineList.map((t, idx) => (
+                        <option key={idx} value={t}>
+                          {t}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* How did you find us Dropdown */}
+                  <div className="flex flex-col space-y-2">
+                    <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider">
+                      How Did You Find Us?
+                    </span>
+                    <select
+                      value={formData.source}
+                      onChange={(e) =>
+                        setFormData({ ...formData, source: e.target.value })
+                      }
+                      className="w-full bg-[#0a0a12] border border-purple-900/40 rounded-lg px-4 py-3 text-sm text-slate-300 focus:outline-none focus:border-purple-400 appearance-none cursor-pointer focus:ring-1 focus:ring-purple-400"
+                    >
+                      <option value="">Select source</option>
+                      {sourceList.map((s, idx) => (
+                        <option key={idx} value={s}>
+                          {s}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Conditional: Current Website URL (only for Website Redesign) */}
+                {formData.service === "Website Redesign" && (
+                  <div className="relative group animate-fade-in">
+                    <input
+                      type="text"
+                      value={formData.currentWebsite}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          currentWebsite: e.target.value,
+                        })
+                      }
+                      placeholder=" "
+                      className="w-full bg-purple-950/10 border border-purple-900/40 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all duration-300 placeholder-transparent"
+                    />
+                    <label className="absolute left-4 top-3 text-xs text-slate-400 pointer-events-none transition-all duration-300 origin-left transform -translate-y-6 scale-75 bg-[#07070c] px-1 group-placeholder-shown:translate-y-0 group-placeholder-shown:scale-100 group-focus:-translate-y-6 group-focus:scale-75 group-focus:text-purple-400">
+                      Current Website URL
+                    </label>
+                  </div>
+                )}
 
                 {/* Textarea Description */}
                 <div className="relative group">
@@ -432,11 +546,9 @@ export default function Contact() {
             <div className="space-y-6">
               <div className="p-5 rounded-xl border border-purple-950 bg-purple-950/10 backdrop-blur-md space-y-1">
                 <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
-                  Email Interface
+                  ordercraft21@gmail.com
                 </span>
-                <div className="text-base text-purple-300 font-mono hover:text-white transition-colors cursor-pointer">
-                  hello@ordercraft.dev
-                </div>
+                <div className="text-base text-purple-300 font-mono hover:text-white transition-colors cursor-pointer"></div>
               </div>
 
               <div className="p-5 rounded-xl border border-purple-950 bg-purple-950/10 backdrop-blur-md space-y-1">
@@ -477,16 +589,18 @@ export default function Contact() {
                 Social Networks
               </span>
               <div className="flex flex-wrap gap-3 font-mono text-xs">
-                {["LinkedIn", "GitHub", "Instagram", "Behance", "Dribbble"].map(
-                  (soc, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1.5 rounded bg-purple-950/20 border border-purple-950 hover:border-purple-500/30 text-slate-400 hover:text-purple-400 cursor-pointer transition-all duration-300"
-                    >
-                      {soc}
-                    </span>
-                  ),
-                )}
+                {socialLinks.map(({ name, url, Icon }, i) => (
+                  <a
+                    key={i}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded bg-purple-950/20 border border-purple-950 hover:border-purple-500/30 text-slate-400 hover:text-purple-400 cursor-pointer transition-all duration-300"
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                    <span>{name}</span>
+                  </a>
+                ))}
               </div>
             </div>
           </div>
